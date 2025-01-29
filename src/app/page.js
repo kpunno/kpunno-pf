@@ -6,13 +6,13 @@ export default function Home() {
   return (
     <>
       {/* dark:text-white */}
-      <div className="px-40 py-20">
+      <div className="justify-center px-6 max-w-[48rem] mx-auto py-20">
         <div>
-          <h1 className="text-[4rem]">kristjan punno</h1>
+          <h1 className="leading-none text-[4rem]">Kristjan Punno</h1>
         </div>
         <br />
-        <div className="flex">
-          <p>
+        <div>
+          <p className="text-gray-700">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
             sodales vulputate euismod. Proin condimentum massa urna, non
             faucibus est vestibulum nec. Curabitur id finibus justo. Vivamus

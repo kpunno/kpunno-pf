@@ -6,21 +6,15 @@ export default function Projects() {
   return (
     <>
       {/* dark:text-white */}
-      <div className="px-40 py-20">
+      <div className="px-[2rem] py-20">
         <div>
-          <h1 className="text-[4rem]">projects</h1>
+          <h1 className="leading-none text-[4rem]">projects</h1>
         </div>
         <br />
-        <div className="flex">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-            sodales vulputate euismod. Proin condimentum massa urna, non
-            faucibus est vestibulum nec. Curabitur id finibus justo. Vivamus
-            facilisis hendrerit orci at pharetra. Vestibulum eu magna in quam
-            fringilla eleifend quis ut quam. Duis efficitur elementum magna,
-            quis dignissim elit gravida vel. Nullam cursus mauris eget tellus
-            consequat ultrices.{" "}
-          </p>
+        <div className="flex flex-col [&_p]:py-4">
+          <p>WELL 1: Click here to see this source!</p>
+          <p>WELL 2: Click here to play Astroboy!</p>
+          <p>WELL 3: Click here to try out AIChefBot!</p>
         </div>
       </div>
     </>
