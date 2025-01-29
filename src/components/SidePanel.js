@@ -7,7 +7,7 @@ const SidePanel = (toggle) => {
   const [open, setOpen] = useState(false);
 
   return open ? (
-    <div className="sidepanel h-full fixed flex w-full max-w-[14rem] flex-col rounded-r-xl bg-white text-gray-700 shadow-xl shadow-gray-900/5 bg-opacity-75 p-0">
+    <div className="sidepanel h-full fixed flex w-full max-w-[12rem] flex-col rounded-r-xl bg-white text-gray-700 shadow-xl shadow-gray-900/5 backdrop-blur-[3px] bg-opacity-90 p-0">
       <div className="flex items-center justify-between p-2 m-0">
       
         {/*<img className="w-[36] h-[36]" src={"./../favicon.ico"}></img>*/}
@@ -15,7 +15,7 @@ const SidePanel = (toggle) => {
           kpunno
         </strong>
         <svg
-          className="transition-transform ease-linear hover:-translate-x-1"
+          className="transition-transform ease-linear focus:-translate-x-1 hover:-translate-x-1"
           onClick={()=>setOpen(false)}
           xmlns="http://www.w3.org/2000/svg"
           height="24px"
@@ -51,7 +51,7 @@ const SidePanel = (toggle) => {
   ) : (
     <div className="flex fixed justify-between items-center p-2 mb-1 hover:text-[#FA0FFF] focus:text-[#FA0FFF]">
   <svg
-    className="transition-transform ease-linear hover:translate-x-1"
+    className="transition-transform ease-in focus:translate-x-1 hover:translate-x-1"
     onClick={() => setOpen(true)}
     xmlns="http://www.w3.org/2000/svg"
     height="24px"
