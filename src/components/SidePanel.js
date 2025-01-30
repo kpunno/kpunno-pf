@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
-const SidePanel = (toggle) => {
+export default function SidePanel() {
   const [open, setOpen] = useState(false);
   var pathname = usePathname().substring(1);
   pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
@@ -34,18 +34,21 @@ const SidePanel = (toggle) => {
           role="button"
           className="flex items-center w-full p-3 transition-all rounded-lg outline-none hover:text-[#FA0FFF] focus:text-[#FA0FFF] hover:translate-x-1"
         >
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FA0"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
           <Link onClick={()=>setOpen(false)} href="./">Home</Link>
         </div>
         <div
           role="button"
           className="disabled flex items-center w-full p-3 transition-all rounded-lg outline-none hover:text-[#FA0FFF] focus:text-[#FA0FFF] hover:translate-x-1"
         >
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FA0"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
           About
         </div>
         <div
           role="button"
           className="flex items-center w-full p-3 transition-all rounded-lg outline-none hover:text-[#FA0FFF] focus:text-[#FA0FFF] hover:translate-x-1"
         >
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FA0"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
           <Link onClick={()=>setOpen(false)} href="/projects">Projects</Link>
         </div>
       </nav>
@@ -61,11 +64,9 @@ const SidePanel = (toggle) => {
     width="34px"
     fill="#FA0FFF"
   >
-    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm280-80h280v-560H480v560Z" />
+    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm280-80h280v-560H480v560Z"/>
   </svg>
 </div>
 
   );
 };
-
-export default SidePanel;
