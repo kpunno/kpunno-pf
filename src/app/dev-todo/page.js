@@ -6,6 +6,7 @@ export default function todo() {
         <li>Projects section wells</li>
         <li>Integrate 6502js into the website, give credit to author</li>
         <li>Permissions for AIChefBot</li>
+        <li>Reformat layout to include homepage styling</li>
       </ul>
     </div>
   );
