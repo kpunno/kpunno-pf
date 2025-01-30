@@ -2,25 +2,27 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 const SidePanel = (toggle) => {
   const [open, setOpen] = useState(false);
+  var pathname = usePathname().substring(1);
+  pathname = pathname.charAt(0).toUpperCase() + pathname.slice(1);
+  pathname = pathname == "" ? "Home" : pathname;
 
   return open ? (
-    <div className="sidepanel h-full fixed flex w-full max-w-[12rem] flex-col rounded-r-xl bg-white text-gray-700 shadow-xl shadow-gray-900/5 backdrop-blur-[3px] bg-opacity-90 p-0">
+    <div className="sidepanel h-full fixed flex w-full max-w-[10rem] flex-col rounded-r-xl bg-white text-gray-700 shadow-xl shadow-gray-900/5 backdrop-blur-[3px] bg-opacity-90 p-0">
       <div className="flex items-center justify-between p-2 m-0">
-      
-        {/*<img className="w-[36] h-[36]" src={"./../favicon.ico"}></img>*/}
-        <strong className="block font-sans text-l antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
-          kpunno
+        <strong className="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
+          {pathname}
         </strong>
         <svg
           className="transition-transform ease-linear focus:-translate-x-1 hover:-translate-x-1"
           onClick={()=>setOpen(false)}
           xmlns="http://www.w3.org/2000/svg"
-          height="24px"
           viewBox="0 -960 960 960"
-          width="24px"
+          height="34px"
+          width="34px"
           fill="#FA0FFF"
         >
           <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm280-80h280v-560H480v560Z" />
@@ -54,9 +56,9 @@ const SidePanel = (toggle) => {
     className="transition-transform ease-in focus:translate-x-1 hover:translate-x-1"
     onClick={() => setOpen(true)}
     xmlns="http://www.w3.org/2000/svg"
-    height="24px"
     viewBox="0 -960 960 960"
-    width="24px"
+    height="34px"
+    width="34px"
     fill="#FA0FFF"
   >
     <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm280-80h280v-560H480v560Z" />
