@@ -19,3 +19,12 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+h1 {
+  font-size: 48px;
+  line-height: 1;
+}
+
+div {
+  font-size: 18px;
+}
