@@ -34,21 +34,21 @@ export default function SidePanel() {
           role="button"
           className="flex items-center w-full p-3 transition-all rounded-lg outline-none hover:text-[#FA0FFF] focus:text-[#FA0FFF] hover:translate-x-1"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FA0"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#6e006a"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
           <Link onClick={()=>setOpen(false)} href="./">Home</Link>
         </div>
         <div
           role="button"
           className="disabled flex items-center w-full p-3 transition-all rounded-lg outline-none hover:text-[#FA0FFF] focus:text-[#FA0FFF] hover:translate-x-1"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FA0"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#6e006a"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
           About
         </div>
         <div
           role="button"
           className="flex items-center w-full p-3 transition-all rounded-lg outline-none hover:text-[#FA0FFF] focus:text-[#FA0FFF] hover:translate-x-1"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#FA0"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#6e006a"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
           <Link onClick={()=>setOpen(false)} href="/projects">Projects</Link>
         </div>
       </nav>

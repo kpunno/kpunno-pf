@@ -6,11 +6,11 @@ export default function Home() {
     <>
       {/* dark:text-white, bg-charcoal */}
       <div>
-        <h1>Kristjan Punno</h1>
+        <h1 className="text-[#1f1f1f]">Kristjan Punno</h1>
       </div>
       <br />
       <div>
-        <p className="text-gray-700">
+        <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
           sodales vulputate euismod. Proin condimentum massa urna, non faucibus
           est vestibulum nec. Curabitur id finibus justo. Vivamus facilisis
