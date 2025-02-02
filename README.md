@@ -2,10 +2,16 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+Run the development server:
 
 ```bash
 npm run dev
+```
+
+**Or**, run the container:
+
+```bash
+docker run -p 3000:3000 kpunno-pf
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser.
