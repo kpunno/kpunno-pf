@@ -8,7 +8,7 @@ Run the development server:
 npm run dev
 ```
 
-**Or**, run the container:
+Run the container:
 
 ```bash
 docker run -p 3000:3000 kpunno-pf
