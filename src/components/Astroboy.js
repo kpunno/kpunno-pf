@@ -76,11 +76,6 @@ export default function Astroboy() {
           <path d="M120-120v-320h80v184l504-504H520v-80h320v320h-80v-184L256-200h184v80H120Z" />
         )}
       </svg>
-      <code-bedder
-        id="code"
-        data-language="asm6502"
-        onhighlight="Prism.highlightElement(this)"
-      ></code-bedder>
       <br />
     </div>
   );
