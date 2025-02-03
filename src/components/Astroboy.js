@@ -1,37 +1,89 @@
 /*
-   *  6502 assembler and simulator in Javascript
-   *  (C)2006-2010 Stian Soreng - www.6502asm.com
-   *
-   *  Adapted by Nick Morgan
-   *  https://github.com/skilldrick/6502js
-   *
-   *  Adapted by Chris Tyler
-   *  https://github.com/ctyler/6502js
-   *
-   *  Released under the GNU General Public License
-   *  see http://gnu.org/licenses/gpl.html
-*/
+ *  6502 assembler and simulator in Javascript
+ *  (C)2006-2010 Stian Soreng - www.6502asm.com
+ *
+ *  Adapted by Nick Morgan
+ *  https://github.com/skilldrick/6502js
+ *
+ *  Adapted by Chris Tyler
+ *  https://github.com/ctyler/6502js
+ *
+ *  Released under the GNU General Public License
+ *  see http://gnu.org/licenses/gpl.html
+ */
 
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 
 export default function Astroboy() {
-
-    const [simulator, setSimulator] = useState(null);
-
-    const canvasRef = useRef(null);
-    useEffect(() => {
-        if (canvasRef.current) {
-            setSimulator(SimulatorWidget(canvasRef.current));   
-        }
-    },[]);
-
-    async function handleAutoRun() {
-        if (simulator) {
-            await simulator.autoRun();
-        }
+  const [simulator, setSimulator] = useState(null);
+  const [canvasSize, setCanvasSize] = useState([320, 320]);
+  const [fullscreen, setFullscreen] = useState(false);
+  const [canvas_x, canvas_y] = canvasSize;
+  const canvasRef = useRef(null);
+  useEffect(() => {
+    if (canvasRef.current) {
+      setSimulator(SimulatorWidget(canvasRef.current));
     }
+  }, [canvasSize]);
+
+  async function handleAutoRun() {
+    if (simulator) {
+      await simulator.autoRun();
+    }
+  }
+
+  function handleFullscreen() {
+    if (!fullscreen) {
+      setCanvasSize([640, 640]);
+      setFullscreen(true);
+    } else {
+      setCanvasSize([320, 320]);
+      setFullscreen(false);
+    }
+  }
+
+  const JSX = (
+    <div>
+      <div>
+        <button onClick={handleAutoRun} className="hover:text-[#6e006a] hover:cursor-pointer absolute select-none"><i>start</i></button>
+        <textarea id="codebed" hidden></textarea>
+        <br />
+        {/*download asm?*/}
+        <button hidden>save</button>
+      </div>
+
+      <canvas
+        ref={canvasRef}
+        className="screen outline-2 outline-solid outline-[#FA0]"
+        width={canvas_x}
+        height={canvas_y}
+      ></canvas>
+      <svg
+        onClick={handleFullscreen}
+        xmlns="http://www.w3.org/2000/svg"
+        height="24px"
+        viewBox="0 -960 960 960"
+        width="24px"
+        fill="black"
+        transform="rotate(45 0 0)"
+        className="hover:fill-[#6e006a] hover:cursor-pointer absolute"
+      >
+        {fullscreen ? (
+          <path d="m136-80-56-56 264-264H160v-80h320v320h-80v-184L136-80Zm344-400v-320h80v184l264-264 56 56-264 264h184v80H480Z" />
+        ) : (
+          <path d="M120-120v-320h80v184l504-504H520v-80h320v320h-80v-184L256-200h184v80H120Z" />
+        )}
+      </svg>
+      <code-bedder
+        id="code"
+        data-language="asm6502"
+        onhighlight="Prism.highlightElement(this)"
+      ></code-bedder>
+      <br />
+    </div>
+  );
 
   function SimulatorWidget(canvas) {
     var ui = UI();
@@ -44,7 +96,16 @@ export default function Astroboy() {
     // Make difficult levels!
     var speed = 53;
 
+    function handleKeydown(e) {
+      if (simulator) {
+        e.preventDefault();
+        memory.storeKeydown(e);
+      }
+    }
+
     async function autoRun() {
+      console.log("Simulator run.");
+      document.addEventListener("keydown", handleKeydown);
       var code = await ui.loadCodeFile();
       assembler.assembleCode(code);
       simulator.runBinary();
@@ -110,11 +171,10 @@ export default function Astroboy() {
       async function loadCodeFile() {
         let code;
         try {
-            code =  await fetch("/asm/astroboy.asm").then((res) => res.text());
-            return code;
-        }
-        catch(err) {
-            console.log(err);
+          code = await fetch("/asm/astroboy.asm").then((res) => res.text());
+          return code;
+        } catch (err) {
+          console.log(err);
         }
       }
 
@@ -126,7 +186,22 @@ export default function Astroboy() {
     function Display() {
       var displayArray = [];
       var palette = [
-        "#000000", "#ffffff", "#880000", "#aaffee", "#cc44cc", "#00cc55", "#0000aa", "#eeee77", "#dd8855", "#664400", "#ff7777", "#333333", "#777777", "#aaff66", "#0088ff", "#bbbbbb",
+        "#000000",
+        "#ffffff",
+        "#880000",
+        "#aaffee",
+        "#cc44cc",
+        "#00cc55",
+        "#0000aa",
+        "#eeee77",
+        "#dd8855",
+        "#664400",
+        "#ff7777",
+        "#333333",
+        "#777777",
+        "#aaff66",
+        "#0088ff",
+        "#bbbbbb",
       ];
       var ctx;
       var width;
@@ -1649,6 +1724,7 @@ export default function Astroboy() {
       function stop() {
         codeRunning = false;
         console.log("\nStopped\n");
+        document.removeEventListener("keydown", memory.storeKeydown);
       }
 
       function toggleMonitor() {
@@ -1776,879 +1852,10 @@ export default function Astroboy() {
       var codeAssembledOK = false;
       var wasOutOfRangeBranch = false;
 
-      var Opcodes = [
+        var Opcodes = [
         /* Name, Imm,  ZP,   ZPX,  ZPY,  ABS, ABSX, ABSY,  IND, INDX, INDY, SNGL, BRA */
-        [
-          "ADC",
-          0x69,
-          0x65,
-          0x75,
-          null,
-          0x6d,
-          0x7d,
-          0x79,
-          null,
-          0x61,
-          0x71,
-          null,
-          null,
-        ],
-        [
-          "AND",
-          0x29,
-          0x25,
-          0x35,
-          null,
-          0x2d,
-          0x3d,
-          0x39,
-          null,
-          0x21,
-          0x31,
-          null,
-          null,
-        ],
-        [
-          "ASL",
-          null,
-          0x06,
-          0x16,
-          null,
-          0x0e,
-          0x1e,
-          null,
-          null,
-          null,
-          null,
-          0x0a,
-          null,
-        ],
-        [
-          "BIT",
-          null,
-          0x24,
-          null,
-          null,
-          0x2c,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        [
-          "BPL",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x10,
-        ],
-        [
-          "BMI",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x30,
-        ],
-        [
-          "BVC",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x50,
-        ],
-        [
-          "BVS",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x70,
-        ],
-        [
-          "BCC",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x90,
-        ],
-        [
-          "BCS",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0xb0,
-        ],
-        [
-          "BNE",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0xd0,
-        ],
-        [
-          "BEQ",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0xf0,
-        ],
-        [
-          "BRK",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x00,
-          null,
-        ],
-        [
-          "CMP",
-          0xc9,
-          0xc5,
-          0xd5,
-          null,
-          0xcd,
-          0xdd,
-          0xd9,
-          null,
-          0xc1,
-          0xd1,
-          null,
-          null,
-        ],
-        [
-          "CPX",
-          0xe0,
-          0xe4,
-          null,
-          null,
-          0xec,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        [
-          "CPY",
-          0xc0,
-          0xc4,
-          null,
-          null,
-          0xcc,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        [
-          "DEC",
-          null,
-          0xc6,
-          0xd6,
-          null,
-          0xce,
-          0xde,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        [
-          "EOR",
-          0x49,
-          0x45,
-          0x55,
-          null,
-          0x4d,
-          0x5d,
-          0x59,
-          null,
-          0x41,
-          0x51,
-          null,
-          null,
-        ],
-        [
-          "CLC",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x18,
-          null,
-        ],
-        [
-          "SEC",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x38,
-          null,
-        ],
-        [
-          "CLI",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x58,
-          null,
-        ],
-        [
-          "SEI",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x78,
-          null,
-        ],
-        [
-          "CLV",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0xb8,
-          null,
-        ],
-        [
-          "CLD",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0xd8,
-          null,
-        ],
-        [
-          "SED",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0xf8,
-          null,
-        ],
-        [
-          "INC",
-          null,
-          0xe6,
-          0xf6,
-          null,
-          0xee,
-          0xfe,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        [
-          "JMP",
-          null,
-          null,
-          null,
-          null,
-          0x4c,
-          null,
-          null,
-          0x6c,
-          null,
-          null,
-          null,
-          null,
-        ],
-        [
-          "JSR",
-          null,
-          null,
-          null,
-          null,
-          0x20,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        [
-          "LDA",
-          0xa9,
-          0xa5,
-          0xb5,
-          null,
-          0xad,
-          0xbd,
-          0xb9,
-          null,
-          0xa1,
-          0xb1,
-          null,
-          null,
-        ],
-        [
-          "LDX",
-          0xa2,
-          0xa6,
-          null,
-          0xb6,
-          0xae,
-          null,
-          0xbe,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        [
-          "LDY",
-          0xa0,
-          0xa4,
-          0xb4,
-          null,
-          0xac,
-          0xbc,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        [
-          "LSR",
-          null,
-          0x46,
-          0x56,
-          null,
-          0x4e,
-          0x5e,
-          null,
-          null,
-          null,
-          null,
-          0x4a,
-          null,
-        ],
-        [
-          "NOP",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0xea,
-          null,
-        ],
-        [
-          "ORA",
-          0x09,
-          0x05,
-          0x15,
-          null,
-          0x0d,
-          0x1d,
-          0x19,
-          null,
-          0x01,
-          0x11,
-          null,
-          null,
-        ],
-        [
-          "TAX",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0xaa,
-          null,
-        ],
-        [
-          "TXA",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x8a,
-          null,
-        ],
-        [
-          "DEX",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0xca,
-          null,
-        ],
-        [
-          "INX",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0xe8,
-          null,
-        ],
-        [
-          "TAY",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0xa8,
-          null,
-        ],
-        [
-          "TYA",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x98,
-          null,
-        ],
-        [
-          "DEY",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x88,
-          null,
-        ],
-        [
-          "INY",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0xc8,
-          null,
-        ],
-        [
-          "ROR",
-          null,
-          0x66,
-          0x76,
-          null,
-          0x6e,
-          0x7e,
-          null,
-          null,
-          null,
-          null,
-          0x6a,
-          null,
-        ],
-        [
-          "ROL",
-          null,
-          0x26,
-          0x36,
-          null,
-          0x2e,
-          0x3e,
-          null,
-          null,
-          null,
-          null,
-          0x2a,
-          null,
-        ],
-        [
-          "RTI",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x40,
-          null,
-        ],
-        [
-          "RTS",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x60,
-          null,
-        ],
-        [
-          "SBC",
-          0xe9,
-          0xe5,
-          0xf5,
-          null,
-          0xed,
-          0xfd,
-          0xf9,
-          null,
-          0xe1,
-          0xf1,
-          null,
-          null,
-        ],
-        [
-          "STA",
-          null,
-          0x85,
-          0x95,
-          null,
-          0x8d,
-          0x9d,
-          0x99,
-          null,
-          0x81,
-          0x91,
-          null,
-          null,
-        ],
-        [
-          "TXS",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x9a,
-          null,
-        ],
-        [
-          "TSX",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0xba,
-          null,
-        ],
-        [
-          "PHA",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x48,
-          null,
-        ],
-        [
-          "PLA",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x68,
-          null,
-        ],
-        [
-          "PHP",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x08,
-          null,
-        ],
-        [
-          "PLP",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0x28,
-          null,
-        ],
-        [
-          "STX",
-          null,
-          0x86,
-          null,
-          0x96,
-          0x8e,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        [
-          "STY",
-          null,
-          0x84,
-          0x94,
-          null,
-          0x8c,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        [
-          "WDM",
-          0x42,
-          0x42,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-        [
-          "---",
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-        ],
-      ];
+            [ "ADC", 0x69, 0x65, 0x75, null, 0x6d, 0x7d, 0x79, null, 0x61, 0x71, null, null, ], [ "AND", 0x29, 0x25, 0x35, null, 0x2d, 0x3d, 0x39, null, 0x21, 0x31, null, null, ], [ "ASL", null, 0x06, 0x16, null, 0x0e, 0x1e, null, null, null, null, 0x0a, null, ], [ "BIT", null, 0x24, null, null, 0x2c, null, null, null, null, null, null, null, ], [ "BPL", null, null, null, null, null, null, null, null, null, null, null, 0x10, ], [ "BMI", null, null, null, null, null, null, null, null, null, null, null, 0x30, ], [ "BVC", null, null, null, null, null, null, null, null, null, null, null, 0x50, ], [ "BVS", null, null, null, null, null, null, null, null, null, null, null, 0x70, ], [ "BCC", null, null, null, null, null, null, null, null, null, null, null, 0x90, ], [ "BCS", null, null, null, null, null, null, null, null, null, null, null, 0xb0, ], [ "BNE", null, null, null, null, null, null, null, null, null, null, null, 0xd0, ], [ "BEQ", null, null, null, null, null, null, null, null, null, null, null, 0xf0, ], [ "BRK", null, null, null, null, null, null, null, null, null, null, 0x00, null, ], [ "CMP", 0xc9, 0xc5, 0xd5, null, 0xcd, 0xdd, 0xd9, null, 0xc1, 0xd1, null, null, ], [ "CPX", 0xe0, 0xe4, null, null, 0xec, null, null, null, null, null, null, null, ], [ "CPY", 0xc0, 0xc4, null, null, 0xcc, null, null, null, null, null, null, null, ], [ "DEC", null, 0xc6, 0xd6, null, 0xce, 0xde, null, null, null, null, null, null, ], [ "EOR", 0x49, 0x45, 0x55, null, 0x4d, 0x5d, 0x59, null, 0x41, 0x51, null, null, ], [ "CLC", null, null, null, null, null, null, null, null, null, null, 0x18, null, ], [ "SEC", null, null, null, null, null, null, null, null, null, null, 0x38, null, ], [ "CLI", null, null, null, null, null, null, null, null, null, null, 0x58, null, ], [ "SEI", null, null, null, null, null, null, null, null, null, null, 0x78, null, ], [ "CLV", null, null, null, null, null, null, null, null, null, null, 0xb8, null, ], [ "CLD", null, null, null, null, null, null, null, null, null, null, 0xd8, null, ], [ "SED", null, null, null, null, null, null, null, null, null, null, 0xf8, null, ], [ "INC", null, 0xe6, 0xf6, null, 0xee, 0xfe, null, null, null, null, null, null, ], [ "JMP", null, null, null, null, 0x4c, null, null, 0x6c, null, null, null, null, ], [ "JSR", null, null, null, null, 0x20, null, null, null, null, null, null, null, ], [ "LDA", 0xa9, 0xa5, 0xb5, null, 0xad, 0xbd, 0xb9, null, 0xa1, 0xb1, null, null, ], [ "LDX", 0xa2, 0xa6, null, 0xb6, 0xae, null, 0xbe, null, null, null, null, null, ], [ "LDY", 0xa0, 0xa4, 0xb4, null, 0xac, 0xbc, null, null, null, null, null, null, ], [ "LSR", null, 0x46, 0x56, null, 0x4e, 0x5e, null, null, null, null, 0x4a, null, ], [ "NOP", null, null, null, null, null, null, null, null, null, null, 0xea, null, ], [ "ORA", 0x09, 0x05, 0x15, null, 0x0d, 0x1d, 0x19, null, 0x01, 0x11, null, null, ], [ "TAX", null, null, null, null, null, null, null, null, null, null, 0xaa, null, ], [ "TXA", null, null, null, null, null, null, null, null, null, null, 0x8a, null, ], [ "DEX", null, null, null, null, null, null, null, null, null, null, 0xca, null, ], [ "INX", null, null, null, null, null, null, null, null, null, null, 0xe8, null, ], [ "TAY", null, null, null, null, null, null, null, null, null, null, 0xa8, null, ], [ "TYA", null, null, null, null, null, null, null, null, null, null, 0x98, null, ], [ "DEY", null, null, null, null, null, null, null, null, null, null, 0x88, null, ], [ "INY", null, null, null, null, null, null, null, null, null, null, 0xc8, null, ], [ "ROR", null, 0x66, 0x76, null, 0x6e, 0x7e, null, null, null, null, 0x6a, null, ], [ "ROL", null, 0x26, 0x36, null, 0x2e, 0x3e, null, null, null, null, 0x2a, null, ], [ "RTI", null, null, null, null, null, null, null, null, null, null, 0x40, null, ], [ "RTS", null, null, null, null, null, null, null, null, null, null, 0x60, null, ], [ "SBC", 0xe9, 0xe5, 0xf5, null, 0xed, 0xfd, 0xf9, null, 0xe1, 0xf1, null, null, ], [ "STA", null, 0x85, 0x95, null, 0x8d, 0x9d, 0x99, null, 0x81, 0x91, null, null, ], [ "TXS", null, null, null, null, null, null, null, null, null, null, 0x9a, null, ], [ "TSX", null, null, null, null, null, null, null, null, null, null, 0xba, null, ], [ "PHA", null, null, null, null, null, null, null, null, null, null, 0x48, null, ], [ "PLA", null, null, null, null, null, null, null, null, null, null, 0x68, null, ], [ "PHP", null, null, null, null, null, null, null, null, null, null, 0x08, null, ], [ "PLP", null, null, null, null, null, null, null, null, null, null, 0x28, null, ], [ "STX", null, 0x86, null, 0x96, 0x8e, null, null, null, null, null, null, null, ], [ "STY", null, 0x84, 0x94, null, 0x8c, null, null, null, null, null, null, null, ], [ "WDM", 0x42, 0x42, null, null, null, null, null, null, null, null, null, null, ], [ "---", null, null, null, null, null, null, null, null, null, null, null, null, ], 
+        ];
 
       // Assembles the code into memory
       function assembleCode(code) {
@@ -2680,7 +1887,7 @@ export default function Astroboy() {
 
         if (codeLen === 0) {
           codeAssembledOK = false;
-          console.log('No code to run.');
+          console.log("No code to run.");
         }
 
         if (codeAssembledOK) {
@@ -3506,32 +2713,9 @@ export default function Astroboy() {
     initialize();
 
     return {
-        autoRun: autoRun
-    }
+      autoRun: autoRun,
+    };
   }
 
-  return (
-    <div>
-      <div>
-        <button onClick={handleAutoRun}>autorun</button>
-        <textarea id="codebed" hidden></textarea>
-        <br />
-        <button>save</button>
-      </div>
-      <canvas
-        ref={canvasRef}
-        className="screen"
-        width="320"
-        height="320"
-      ></canvas>
-      <code-bedder
-        id="code"
-        data-language="asm6502"
-        onhighlight="Prism.highlightElement(this)"
-      ></code-bedder>
-
-      <canvas width="320" height="320"></canvas>
-      <br />
-    </div>
-  );
+  return JSX;
 }
