@@ -40,9 +40,12 @@ p {
 }
 
 .pallette {
-  color: #6e006a;
-  color: #FFAA00;
-  color: #FA0FFF;
+  color: #6E006A; /* dark purple */
+  color: #FA0FFF; /* neon purple */
+  color: #ddc000; /* goldenrod */
+  color: #FFAA00; /* goldenrod-orange */
+  color: #FAFAFF; /* eggshell */
+  color: #AFAFAF; /* eggshell-pair grey */
 }
 
 @media (max-width: 768px) {
