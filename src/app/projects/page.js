@@ -6,11 +6,11 @@ export default function Projects() {
     <div>
       {/* dark:text-white */}
       <div>
-        <h1>Projects</h1>
+        <h1 className="pb-2">Projects</h1>
       </div>
-      <br />
       <div className="flex flex-col [&_p]:py-2">
-        <hr className="border-t-2 border-[#6e006a]" />
+        <hr className="border-t-2 border-[#ddc000]" />
+        <hr className="border-t-2 border-[#ddc000]" />
         <br />
         {/* should have a component here to sit project section JSX in wells */}
         <h2 className="pt-4">Astroboy</h2>
@@ -19,7 +19,7 @@ export default function Projects() {
           below.
         </p>
         <br />
-        <div className="flex-row p-2 border-2 rounded-xl border-[#FA0] bg-white hide-on-mobile">
+        <div className="flex-row p-2 border-2 rounded-xl border-[#AFAFAF] bg-[#F0FAFF] hide-on-mobile">
           <div className="px-5 py-2">
             <p>
               You are the cyan pixel, astroboy. Try to avoid the incoming
@@ -46,7 +46,8 @@ export default function Projects() {
         <p>Check out the emulator (hyperlink)</p>
         <br />
         {/* */}
-        <hr className="border-t-2 border-[#6e006a]" />
+        <hr className="border-t-2 border-[#ddc000]" />
+        <hr className="border-t-2 border-[#ddc000]" />
         <p>WELL 1: Click here to see this source!</p>
         <p>WELL 2: Click here to play Astroboy!</p>
         <p>WELL 3: Click here to try out AIChefBot!</p>

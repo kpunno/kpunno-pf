@@ -6,7 +6,9 @@ export default function Home() {
     <>
       {/* dark:text-white, bg-charcoal */}
       <div>
-        <h1 className="text-[#1f1f1f]">Kristjan Punno</h1>
+        <h1 className="pb-2 text-[#1f1f1f]">Kristjan Punno</h1>
+        <hr className="border-t-2 border-[#ddc000]" />
+        <hr className="border-t-2 border-[#ddc000]" />
       </div>
       <br />
       <div>
