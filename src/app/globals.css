@@ -25,10 +25,28 @@ h1 {
   line-height: 1;
 }
 
+h2 {
+  color:#1a171e;
+  font-size: 36px;
+  line-height: 1;
+}
+
 div {
   font-size: 18px;
 }
 
 p {
-  color:#2f2f2f
+  color:#1a171e;
+}
+
+.pallette {
+  color: #6e006a;
+  color: #FFAA00;
+  color: #FA0FFF;
+}
+
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    display: none;
+  }
 }

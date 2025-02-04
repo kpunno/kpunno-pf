@@ -7,6 +7,8 @@ export default function todo() {
         <li>Integrate 6502js into the website, give credit to author</li>
         <li>Permissions for AIChefBot</li>
         <li>Reformat layout to include homepage styling</li>
+	<li>Fix that buttons z-index is over top layout</li>
+	<li>Fix canvas sizing issue on fullscreen (spreads out of div)</li>
       </ul>
     </div>
   );
