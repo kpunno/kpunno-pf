@@ -1,5 +1,6 @@
 // Client-side routing
 import Astroboy from "@/components/Astroboy";
+import Link from "next/link";
 
 export default function Projects() {
   return (
@@ -11,15 +12,17 @@ export default function Projects() {
       <div className="flex flex-col [&_p]:py-2">
         <hr className="border-t-2 border-[#ddc000]" />
         <hr className="border-t-2 border-[#ddc000]" />
-        <br />
         {/* should have a component here to sit project section JSX in wells */}
-        <h2 className="pt-4">Astroboy</h2>
+        <hr className="invisible py-2"/>
+        <h2>Astroboy</h2>
         <p>
-          2D game written in 6502 assembly. Check it out with the emulator
-          below.
+          2D game written with the 6502 instruction set.&nbsp;
+          <span className="hide-on-mobile">
+            Check it out with the emulator below.
+          </span>
         </p>
-        <br />
-        <div className="flex-row p-2 border-2 rounded-xl border-[#AFAFAF] bg-[#F0FAFF] hide-on-mobile">
+        <hr className="invisible py-2"/>
+        <div className="flex-row m-1 border-2 rounded-xl border-[#AFAFAF] bg-[#F0FAFF] hide-on-mobile">
           <div className="px-5 py-2">
             <p>
               You are the cyan pixel, astroboy. Try to avoid the incoming
@@ -40,11 +43,28 @@ export default function Projects() {
           <div className="px-5">
             <Astroboy />
           </div>
+          <hr className="invisible py-2"/>
         </div>
-        <br />
-        <p>Check out the source on github (hyperlink)</p>
-        <p>Check out the emulator (hyperlink)</p>
-        <br />
+        <p>
+          <a
+            className="text-[#905000] underline hover:text-[#C0A000]"
+            href="https://github.com/kpunno/astroboy"
+            target="_blank"
+          >
+            Source code on GitHub.
+          </a>
+          &nbsp; Simulator and assembler adapted from&nbsp;
+          <a
+            className="text-[#905000] underline hover:text-[#C0A000]"
+            href="https://github.com/skilldrick/6502js"
+            target="_blank"
+          >
+            skilldrick 6502js.
+          </a>
+          <br/>
+          <span className="italic text-[14px]">*Keyboard required to run Astroboy.</span>
+        </p>
+        <hr className="invisible py-2"/>
         {/* */}
         <hr className="border-t-2 border-[#ddc000]" />
         <hr className="border-t-2 border-[#ddc000]" />

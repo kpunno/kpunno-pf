@@ -30,33 +30,33 @@ export default function SidePanel() {
       </div>
       <hr />
       <nav className="flex min-w-[120px] flex-col font-sans text-base font-normal text-blue-gray-700">
-        <div
-          role="button"
+        <Link
+          onClick={()=>setOpen(false)} href="./"
           className="flex items-center w-full p-3 transition-all rounded-lg outline-none hover:text-[#ddc000] hover:translate-x-1"
         >
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#AFAFAF"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
-          <Link onClick={()=>setOpen(false)} href="./">Home</Link>
-        </div>
-        <div
-          role="button"
+          Home
+        </Link>
+        <Link
+          onClick={()=>setOpen(false)} href="./about"
           className="disabled flex items-center w-full p-3 transition-all rounded-lg outline-none hover:text-[#ddc000] hover:translate-x-1"
         >
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#AFAFAF"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
           About
-        </div>
-        <div
-          role="button"
+        </Link>
+        <Link
+          onClick={()=>setOpen(false)} href="./projects"
           className="flex items-center w-full p-3 transition-all rounded-lg outline-none hover:text-[#ddc000] hover:translate-x-1"
         >
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#AFAFAF"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
-          <Link onClick={()=>setOpen(false)} href="/projects">Projects</Link>
-        </div>
+          Projects
+        </Link>
       </nav>
     </div>
   ) : (
     <div className="flex fixed justify-between items-center p-2 mb-1 hover:text-[#FA0FFF] focus:text-[#FA0FFF]">
   <svg
-    className="transition-transform ease-in focus:translate-x-1 hover:translate-x-1"
+    className="transition-transform ease-in focus:translate-x-1 hover:translate-x-1 drop-shadow-lg"
     onClick={() => setOpen(true)}
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 -960 960 960"

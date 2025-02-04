@@ -27,7 +27,7 @@ h1 {
 
 h2 {
   color:#1a171e;
-  font-size: 36px;
+  font-size: 30px;
   line-height: 1;
 }
 
@@ -50,6 +50,9 @@ p {
 
 @media (max-width: 768px) {
   .hide-on-mobile {
-    display: none;
+    display:none;
+  }
+  .show-on-mobile {
+    display:flex;
   }
 }

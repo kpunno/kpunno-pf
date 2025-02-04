@@ -10,8 +10,35 @@ export default function Home() {
         <hr className="border-t-2 border-[#ddc000]" />
         <hr className="border-t-2 border-[#ddc000]" />
       </div>
-      <br />
+      <hr className="invisible py-2"/>
       <div>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+          sodales vulputate euismod. Proin condimentum massa urna, non faucibus
+          est vestibulum nec. Curabitur id finibus justo. Vivamus facilisis
+          hendrerit orci at pharetra. Vestibulum eu magna in quam fringilla
+          eleifend quis ut quam. Duis efficitur elementum magna, quis dignissim
+          elit gravida vel. Nullam cursus mauris eget tellus consequat ultrices.{" "}
+        </p>
+        <br/>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+          sodales vulputate euismod. Proin condimentum massa urna, non faucibus
+          est vestibulum nec. Curabitur id finibus justo. Vivamus facilisis
+          hendrerit orci at pharetra. Vestibulum eu magna in quam fringilla
+          eleifend quis ut quam. Duis efficitur elementum magna, quis dignissim
+          elit gravida vel. Nullam cursus mauris eget tellus consequat ultrices.{" "}
+        </p>
+        <br/>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+          sodales vulputate euismod. Proin condimentum massa urna, non faucibus
+          est vestibulum nec. Curabitur id finibus justo. Vivamus facilisis
+          hendrerit orci at pharetra. Vestibulum eu magna in quam fringilla
+          eleifend quis ut quam. Duis efficitur elementum magna, quis dignissim
+          elit gravida vel. Nullam cursus mauris eget tellus consequat ultrices.{" "}
+        </p>
+        <br/>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
           sodales vulputate euismod. Proin condimentum massa urna, non faucibus
