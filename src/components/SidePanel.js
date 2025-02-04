@@ -11,7 +11,7 @@ export default function SidePanel() {
   pathname = pathname == "" ? "Home" : pathname;
 
   return open ? (
-    <div className="sidepanel h-full fixed flex w-full max-w-[10rem] flex-col rounded-r-xl bg-white text-gray-700 shadow-xl shadow-gray-900/5 backdrop-blur-[3px] bg-opacity-90 p-0">
+    <div className="z-[100] sidepanel h-full fixed flex w-full max-w-[10rem] flex-col rounded-r-xl bg-white text-gray-700 shadow-xl shadow-gray-900/5 backdrop-blur-[3px] bg-opacity-90 p-0">
       <div className="flex items-center justify-between p-2 m-0">
         <strong className="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
           {pathname}

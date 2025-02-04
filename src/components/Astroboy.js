@@ -36,10 +36,10 @@ export default function Astroboy() {
 
   function handleFullscreen() {
     if (!fullscreen) {
-      setCanvasSize([640, 640]);
+      setCanvasSize(canvasSize.map((e) => (e=e*2)));
       setFullscreen(true);
     } else {
-      setCanvasSize([320, 320]);
+      setCanvasSize(canvasSize.map((e)=>(e=e/2)));
       setFullscreen(false);
     }
   }
@@ -47,13 +47,21 @@ export default function Astroboy() {
   const JSX = (
     <div>
       <div>
-        <button onClick={handleAutoRun} className="hover:text-[#6e006a] hover:cursor-pointer absolute select-none"><i>start</i></button>
         <textarea id="codebed" hidden></textarea>
         <br />
         {/*download asm?*/}
         <button hidden>save</button>
+        <svg
+          onClick={handleAutoRun}
+          xmlns="http://www.w3.org/2000/svg"
+          height="24px"
+          viewBox="0 -960 960 960"
+          width="24px"
+          fill="black"
+          className="hover:fill-[#6e006a] hover:cursor-pointer"
+        ><path d="M383-480 200-664l56-56 240 240-240 240-56-56 183-184Zm264 0L464-664l56-56 240 240-240 240-56-56 183-184Z"/>
+        </svg>
       </div>
-
       <canvas
         ref={canvasRef}
         className="screen outline-2 outline-solid outline-[#FA0]"
@@ -68,7 +76,7 @@ export default function Astroboy() {
         width="24px"
         fill="black"
         transform="rotate(45 0 0)"
-        className="hover:fill-[#6e006a] hover:cursor-pointer absolute"
+        className="mx-1 hover:fill-[#6e006a] hover:cursor-pointer"
       >
         {fullscreen ? (
           <path d="m136-80-56-56 264-264H160v-80h320v320h-80v-184L136-80Zm344-400v-320h80v184l264-264 56 56-264 264h184v80H480Z" />
@@ -92,8 +100,8 @@ export default function Astroboy() {
     var speed = 53;
 
     function handleKeydown(e) {
+      e.preventDefault();
       if (simulator) {
-        e.preventDefault();
         memory.storeKeydown(e);
       }
     }

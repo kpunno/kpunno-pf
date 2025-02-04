@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Sidepanel/>
-          <div className="justify-center px-6 max-w-[48rem] mx-auto py-20">
+          <div className="justify-center px-8 max-w-[48rem] mx-auto py-20">
             {children}
           </div>
       </body>

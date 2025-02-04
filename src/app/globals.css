@@ -44,3 +44,9 @@ p {
   color: #FFAA00;
   color: #FA0FFF;
 }
+
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    display: none;
+  }
+}
