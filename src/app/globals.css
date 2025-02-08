@@ -44,8 +44,18 @@ p {
   color: #FA0FFF; /* neon purple */
   color: #ddc000; /* goldenrod */
   color: #FFAA00; /* goldenrod-orange */
-  color: #FAFAFF; /* eggshell */
+  color: #F0F0F0; /* eggshell */ /* layout, background */
   color: #AFAFAF; /* eggshell-pair grey */
+}
+
+.bg-stripe {
+    background: repeating-linear-gradient(
+        135deg,
+        rgb(255,255,255),
+        rgb(255,255,255) 3px,
+        rgb(236, 233, 226) 3px,
+        rgb(236, 233, 226) 6px
+    );
 }
 
 @media (max-width: 768px) {

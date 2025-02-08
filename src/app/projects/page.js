@@ -22,7 +22,7 @@ export default function Projects() {
           </span>
         </p>
         <hr className="invisible py-2"/>
-        <div className="flex-row m-1 border-2 rounded-xl border-[#AFAFAF] bg-[#F0FAFF] hide-on-mobile">
+        <div className="flex-row m-1 border-2 rounded-xl border-[#AFAFAF] bg-[#F0FAFF] .bg-stripe hide-on-mobile">
           <div className="px-5 py-2">
             <p>
               You are the cyan pixel, astroboy. Try to avoid the incoming

@@ -13,40 +13,29 @@ export default function Home() {
       <hr className="invisible py-2"/>
       <div>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-          sodales vulputate euismod. Proin condimentum massa urna, non faucibus
-          est vestibulum nec. Curabitur id finibus justo. Vivamus facilisis
-          hendrerit orci at pharetra. Vestibulum eu magna in quam fringilla
-          eleifend quis ut quam. Duis efficitur elementum magna, quis dignissim
-          elit gravida vel. Nullam cursus mauris eget tellus consequat ultrices.{" "}
+          Hey, I'm Kristjan. I guess this is my website.<br/>
+          Check out some demo projects through the sidepanel, or contact me via the links below.
         </p>
         <br/>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-          sodales vulputate euismod. Proin condimentum massa urna, non faucibus
-          est vestibulum nec. Curabitur id finibus justo. Vivamus facilisis
-          hendrerit orci at pharetra. Vestibulum eu magna in quam fringilla
-          eleifend quis ut quam. Duis efficitur elementum magna, quis dignissim
-          elit gravida vel. Nullam cursus mauris eget tellus consequat ultrices.{" "}
+          <br/>
+          <a
+            className="text-[#905000] underline hover:text-[#C0A000]"
+            href="mailto:k.punno@gmail.com"
+            target="_blank"
+          >k.punno@gmail.com</a><br/>
+          <a
+            className="text-[#905000] underline hover:text-[#C0A000]"
+            href="https://www.linkedin.com/in/kristjan-punno-68a873296/"
+            target="_blank"
+          >LinkedIn</a><br/>
+          <a
+            className="text-[#905000] underline hover:text-[#C0A000]"
+            href="https://github.com/kpunno"
+            target="_blank"
+          >GitHub</a>
         </p>
         <br/>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-          sodales vulputate euismod. Proin condimentum massa urna, non faucibus
-          est vestibulum nec. Curabitur id finibus justo. Vivamus facilisis
-          hendrerit orci at pharetra. Vestibulum eu magna in quam fringilla
-          eleifend quis ut quam. Duis efficitur elementum magna, quis dignissim
-          elit gravida vel. Nullam cursus mauris eget tellus consequat ultrices.{" "}
-        </p>
-        <br/>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-          sodales vulputate euismod. Proin condimentum massa urna, non faucibus
-          est vestibulum nec. Curabitur id finibus justo. Vivamus facilisis
-          hendrerit orci at pharetra. Vestibulum eu magna in quam fringilla
-          eleifend quis ut quam. Duis efficitur elementum magna, quis dignissim
-          elit gravida vel. Nullam cursus mauris eget tellus consequat ultrices.{" "}
-        </p>
       </div>
     </>
   );

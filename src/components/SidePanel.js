@@ -56,7 +56,7 @@ export default function SidePanel() {
   ) : (
     <div className="flex fixed justify-between items-center p-2 mb-1 hover:text-[#FA0FFF] focus:text-[#FA0FFF]">
   <svg
-    className="transition-transform ease-in focus:translate-x-1 hover:translate-x-1 drop-shadow-lg"
+    className="transition-transform ease-in focus:translate-x-1 hover:translate-x-1"
     onClick={() => setOpen(true)}
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 -960 960 960"
