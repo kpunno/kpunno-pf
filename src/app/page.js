@@ -13,11 +13,6 @@ export default function Home() {
       <hr className="invisible py-2"/>
       <div>
         <p>
-          Hey, I'm Kristjan. I guess this is my website.<br/>
-          Check out some demo projects through the sidepanel, or contact me via the links below.
-        </p>
-        <br/>
-        <p>
           <br/>
           <a
             className="text-[#905000] underline hover:text-[#C0A000]"

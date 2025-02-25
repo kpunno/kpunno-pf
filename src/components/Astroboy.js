@@ -16,6 +16,10 @@
 
 import { useEffect, useRef, useState } from "react";
 
+/**
+ * @author kpunno
+ * @returns JSX component
+ */
 export default function Astroboy() {
   const [simulator, setSimulator] = useState(null);
   const [canvasSize, setCanvasSize] = useState([320, 320]);
