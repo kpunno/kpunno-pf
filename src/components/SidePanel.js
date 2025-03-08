@@ -12,7 +12,7 @@ export default function SidePanel() {
 
   return open ? (
     <div className="z-[100] sidepanel h-full fixed flex w-full max-w-[10rem] flex-col rounded-r-xl bg-white text-gray-700 shadow-xl shadow-gray-900/5 backdrop-blur-[3px] bg-opacity-90 p-0">
-      <div className="flex items-center justify-between p-2 m-0">
+      <div className="flex items-center justify-between px-2 py-8 m-0">
         <strong className="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
           {pathname}
         </strong>
@@ -54,7 +54,7 @@ export default function SidePanel() {
       </nav>
     </div>
   ) : (
-    <div className="flex fixed justify-between items-center p-2 mb-1 hover:text-[#FA0FFF] focus:text-[#FA0FFF]">
+    <div className="flex fixed justify-between items-center px-2 py-8 mb-1 hover:text-[#FA0FFF] focus:text-[#FA0FFF]">
   <svg
     className="transition-transform ease-in focus:translate-x-1 hover:translate-x-1"
     onClick={() => setOpen(true)}

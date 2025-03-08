@@ -15,7 +15,7 @@ export default function Projects() {
         <hr className="invisible py-2"/>
 
         {/* Astroboy Section */}
-        <h2>Astroboy</h2>
+        <h2 id="astroboy">Astroboy</h2>
         <p>
           2D game written with the 6502 instruction set.&nbsp;
           <span className="hide-on-mobile">
@@ -71,7 +71,7 @@ export default function Projects() {
         <hr className="border-t-2 border-[#ddc000]" />
         <hr className="border-t-2 border-[#ddc000]" />
         <hr className="invisible py-2"/>
-        <h2>AIChefBot</h2>
+        <h2 id="aichefbot">AIChefBot</h2>
         <p>
           AIChefBot is a dynamic recipe generation assistant that aims to please by considering your dietary restrictions.<br/>
         </p>
