@@ -7,13 +7,12 @@ export default function Projects() {
     <div>
       {/* dark:text-white */}
       <div>
-        <h1 className="pb-2">Projects</h1>
+        <h1 className="pb-2 text-[#1f1f1f]">Projects</h1>
+        <hr className="border-t-2 border-[#BBB]" />
+        <hr className="border-t-2 border-[#BBB]" />
       </div>
       <div className="flex flex-col [&_p]:py-2">
-        <hr className="border-t-2 border-[#ddc000]" />
-        <hr className="border-t-2 border-[#ddc000]" />
         <hr className="invisible py-2"/>
-
         {/* Astroboy Section */}
         <h2 id="astroboy">Astroboy</h2>
         <p>
@@ -68,9 +67,9 @@ export default function Projects() {
         <hr className="invisible py-2"/>
 
         {/* AIChefBot section */}
-        <hr className="border-t-2 border-[#ddc000]" />
-        <hr className="border-t-2 border-[#ddc000]" />
-        <hr className="invisible py-2"/>
+        <hr className="border-t-2 border-[#BBB]" />
+        <hr className="border-t-2 border-[#BBB]" />
+        <hr className="invisible py-2" />
         <h2 id="aichefbot">AIChefBot</h2>
         <p>
           AIChefBot is a dynamic recipe generation assistant that aims to please by considering your dietary restrictions.<br/>
