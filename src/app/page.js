@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 // Client-side routing
 import Link from "next/link";
@@ -7,17 +7,17 @@ export default function Home() {
   return (
     <>
       {/* dark:text-white, bg-charcoal */}
-      <div>
+      <div className="flex items-center space-x-14">
         <h1 className="pb-2 text-[#1f1f1f]">Kristjan Punno</h1>
-        <hr className="border-t-2 border-[#BBB]" />
-        <hr className="border-t-2 border-[#BBB]" />
+        {/* Icon? */}
+        {/*<img className="h-[6rem] w-[6rem]" src="./favicon.ico" alt="Kristjan's icon" />*/}
       </div>
       <hr className="invisible py-2" />
       <hr className="invisible py-2" />
       <div>
-        <div className="inline-block">
-          <h2 className="pb-2 text-[#1f1f1f] inline-block">Projects</h2>
-          <hr className="border-t-2 border-[#BBB]" />
+        <div>
+          <h2 className="pb-2 text-[#1f1f1f]">Projects</h2>
+          <hr className="border-t-2 border-[#BBB] w-[50%]" />
         </div>
         <div>
           <p>
@@ -41,7 +41,7 @@ export default function Home() {
         </div>
         <div>
           <h2 className="pb-2 text-[#1f1f1f]">Social</h2>
-          <hr className="border-t-2 w-[20rem] border-[#BBB]" />
+          <hr className="border-t-2 border-[#BBB] w-[50%]" />
         </div>
         <div>
           <p>

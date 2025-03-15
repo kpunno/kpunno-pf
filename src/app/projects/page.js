@@ -1,6 +1,5 @@
 // Client-side routing
 import Astroboy from "@/components/Astroboy";
-import Link from "next/link";
 
 export default function Projects() {
   return (
@@ -13,6 +12,7 @@ export default function Projects() {
       </div>
       <div className="flex flex-col [&_p]:py-2">
         <hr className="invisible py-2"/>
+        <hr className="invisible py-2" />
         {/* Astroboy Section */}
         <h2 id="astroboy">Astroboy</h2>
         <p>
@@ -62,13 +62,15 @@ export default function Projects() {
             skilldrick 6502js.
           </a>
           <br/>
-          <span className="italic text-[14px]">*Keyboard required to run Astroboy.</span>
+          <span className="italic text-[14px]">*Keyboard required to run Astroboy. No touchscreen! Sorry :(</span>
         </p>
         <hr className="invisible py-2"/>
 
         {/* AIChefBot section */}
+        <hr className="invisible py-2" />
         <hr className="border-t-2 border-[#BBB]" />
         <hr className="border-t-2 border-[#BBB]" />
+        <hr className="invisible py-2" />
         <hr className="invisible py-2" />
         <h2 id="aichefbot">AIChefBot</h2>
         <p>
